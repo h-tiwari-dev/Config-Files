@@ -63,3 +63,7 @@ end)
 vim.keymap.set('n','<leader>vs', '<cmd>VenvSelect<cr>')
     -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
 vim.keymap.set('n', '<leader>vc', '<cmd>VenvSelectCached<cr>' )
+-- Create shortcuts for RestNvim plugin
+vim.api.nvim_set_keymap('n', '<Leader>r', '<Plug>RestNvim', {})
+vim.api.nvim_set_keymap('n', '<Leader>rp', '<Plug>RestNvimPreview', {})
+vim.api.nvim_set_keymap('n', '<Leader>rl', '<Plug>RestNvimLast', {})

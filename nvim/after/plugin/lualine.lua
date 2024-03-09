@@ -1,4 +1,3 @@
-local navic = require("nvim-navic")
 local venv_selector = require('venv-selector')
 
 -- Bubbles config for lualine
@@ -27,15 +26,15 @@ local bubbles_theme = {
     x = { fg = colors.green, bg = colors.black },
   },
 
-  insert = { a = { fg = colors.black, bg = colors.yellow} },
-  visual = { a = { fg = colors.black, bg = colors.white} },
+  insert = { a = { fg = colors.black, bg = colors.yellow } },
+  visual = { a = { fg = colors.black, bg = colors.white } },
   replace = { a = { fg = colors.black, bg = colors.red } },
 
   inactive = {
-    a = { fg = colors.white, bg = colors.black },
-    b = { fg = colors.white, bg = colors.black },
-    c = { fg = colors.blue, bg = colors.black },
-    x = { fg = colors.green, bg = colors.black },
+    a = { fg = colors.white, bg = nil },
+    b = { fg = colors.white, bg = nil },
+    c = { fg = colors.blue, bg = nil },
+    x = { fg = colors.green, bg = nil },
   },
 }
 
@@ -64,24 +63,21 @@ end
 require('lualine').setup {
     options = {
         theme = bubbles_theme,
+        section_separators = { left = '', right = ''},
         component_separators = '|',
     },
     sections = {
         lualine_a = {
-            { 'mode',  right_padding = 2 },
+            { 'mode',  right_padding = 2},
         },
         lualine_b = { 
             'filename',
-            'branch'
+            'branch',
         },
         lualine_c = {
             {
-                function()
-                    return navic.get_location()
-                end,
-                cond = function()
-                    return navic.is_available()
-                end
+                'filename',
+                path = 1,
             },
         },
         lualine_x = {
@@ -89,7 +85,8 @@ require('lualine').setup {
         },
         lualine_y = {
             'filetype',
-            'progress'
+            'progress',
+            'rest'
         },
         lualine_z = {
             { 'location',  left_padding = 2 },

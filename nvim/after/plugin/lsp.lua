@@ -92,7 +92,7 @@ require('mason-lspconfig').setup({
         'lua_ls',
         'gopls',
         'glint',
-        'pyright'
+        'pyright',
     },
 	handlers = {
 		lsp_zero.default_setup,
