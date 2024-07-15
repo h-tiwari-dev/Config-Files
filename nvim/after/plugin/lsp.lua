@@ -11,9 +11,11 @@ require("neodev").setup({
 -- Function to execute a command and capture its output
 local function execute_command(command)
     local handle = io.popen(command)
-    local result = handle:read("*a")
-    handle:close()
-    return result and result:gsub("\n$", "") or nil
+    if handle ~= nil then
+        local result = handle:read("*a")
+        handle:close()
+        return result and result:gsub("\n$", "") or nil
+    end
 end
 
 -- Custom hook for changing Pyright setup Python path
@@ -93,22 +95,65 @@ require('mason-lspconfig').setup({
         'gopls',
         'glint',
         'pyright',
+        'eslint', -- Add eslint for React and JSX checking
     },
 	handlers = {
-		lsp_zero.default_setup,
+        lsp_zero.default_setup,
         tsserver = function ()
             lspconfig.tsserver.setup {
                 on_attach = function(client, bufnr)
                     lsp_zero.async_autoformat(client, bufnr)
                 end,
+                settings = {
+                    tsserver = {
+                        formatting = {
+                            enable = true,
+                            options = {
+                                tabSize = 4,
+                                insertSpaces = true,
+                                endOfLine = "lf"
+                            }
+                        },
+                        diagnostics = {
+                            enable = true,
+                            severity = {
+                                "error",
+                                "warning",
+                                "information",
+                                "hint"
+                            }
+                        }
+                    }
+                }
             }
         end,
+        eslint = function ()
+            lspconfig.eslint.setup {
+                on_attach = function(client, bufnr)
+                    lsp_zero.async_autoformat(client, bufnr)
+                end,
+                filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+                root_dir = util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json"),
+                settings = {
+                    eslint = {
+                        lintTask = 'eslint',
+                        lintFormats = { '%f:%l:%c: %m' },
+                        formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
+                        formatStdin = true,
+                    },
+                },
+            }
+        end,
+
         gopls = function ()
             lspconfig.gopls.setup {
                 cmd = {"gopls"},
                 filetypes = { "go", "gomod", "gowork", "gotmpl" },
                 root_dir = util.root_pattern("go.work", "go.mod", ".git"),
                 settings = {
+                    on_attach = function(client, bufnr)
+                        lsp_zero.async_autoformat(client, bufnr)
+                    end,
                     gopls = {
                         completeUnimported = true,
                         usePlaceholders = true,

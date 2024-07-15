@@ -32,7 +32,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")  -- Map Ctrl-c to Escape in insert mode
 vim.keymap.set("n", "Q", "<nop>")  -- No operation for Q
 
 -- Create a new tmux window with tmux-sessionizer
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")  -- Open tmux-sessionizer in a new tmux window
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")  -- Open tmux-sessionizer in a new tmux window
 
 -- LSP format command
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)  -- Format code with LSP
@@ -63,7 +63,11 @@ end)
 vim.keymap.set('n','<leader>vs', '<cmd>VenvSelect<cr>')
     -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
 vim.keymap.set('n', '<leader>vc', '<cmd>VenvSelectCached<cr>' )
--- Create shortcuts for RestNvim plugin
-vim.api.nvim_set_keymap('n', '<Leader>r', '<Plug>RestNvim', {})
-vim.api.nvim_set_keymap('n', '<Leader>rp', '<Plug>RestNvimPreview', {})
-vim.api.nvim_set_keymap('n', '<Leader>rl', '<Plug>RestNvimLast', {})
+
+
+-- Trouble keymaps
+vim.keymap.set('n', '<leader>tc', '<cmd>Trouble cascade<cr>' )
+
+
+-- NeoGit 
+vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<cr>' )
