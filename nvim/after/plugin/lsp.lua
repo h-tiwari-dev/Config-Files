@@ -2,6 +2,7 @@ local lsp_zero = require('lsp-zero')
 local util = require('lspconfig.util')
 local lspconfig = require('lspconfig')
 local venv_selector = require('venv-selector')
+
 require("neodev").setup({
       -- add any options here, or leave empty to use the default settings
       library = { plugins = { "nvim-dap-ui" }, types = true },

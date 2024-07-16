@@ -1,11 +1,4 @@
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:$PATH
@@ -17,12 +10,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_PYENV_QUIET=true
+ZSH_THEME="strug"
+# ZSH_PYENV_QUIET=true
 
 # themes
 plugins=(
     git
+    gh
     docker
     asdf
     zsh-autosuggestions
@@ -70,17 +64,18 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 export PATH="/usr/local/anaconda3/bin:$PATH"
 
+export ENVIRONMENT="dev"
+export MYSQL_USERNAME="harshtiwari"
+export MYSQL_PASSWORD="Julia@1984"
+
 alias ls='lsd'
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
-alias lt='ls --tree'
+# alias lt='ls --tree'
 
 alias lg='lazygit'
 alias cat='bat'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # NVM Setup
 export NVM_DIR=~/.nvm
@@ -98,3 +93,12 @@ nvm use v20 >/dev/null 2>&1
 
 eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# bun completions
+[ -s "/Users/harshtiwari/.bun/_bun" ] && source "/Users/harshtiwari/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

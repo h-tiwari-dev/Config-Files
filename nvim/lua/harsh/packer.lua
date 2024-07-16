@@ -11,17 +11,32 @@ return require('packer').startup(function(use)
     -- telescope.nvim is a highly extendable fuzzy finder over lists. Built on the latest awesome features from neovim core.
     -- Telescope is centered around modularity, allowing for easy customization.
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.5',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        "nvim-telescope/telescope.nvim",
+        requires = {
+            { "nvim-telescope/telescope-live-grep-args.nvim" },
+            { 'nvim-lua/plenary.nvim' }
+        },
+        config = function()
+            local telescope = require("telescope")
+
+            -- first setup telescope
+            telescope.setup({
+                -- your config
+            })
+
+            -- then load the extension
+            telescope.load_extension("live_grep_args")
+        end
     }
 
     -- Tree-sitter
     -- Tree-sitter is an incremental parsing system, it allows for high-performance syntax highlighting, code navigation, and more.
-    use('nvim-treesitter/nvim-treesitter', {run= ':TSUpdate'})
+    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
     -- Themes
     -- kanagawa.nvim is a Neovim theme inspired by the colors of the famous print "The Great Wave off Kanagawa".
     use "rebelot/kanagawa.nvim"
+    use { "scottmckendry/cyberdream.nvim" }
     -- Playground for nvim-treesitter
     use 'nvim-treesitter/playground'
     -- plenary.nvim is a Lua library required by many Neovim plugins.
@@ -45,12 +60,12 @@ return require('packer').startup(function(use)
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         requires = {
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
-            {'neovim/nvim-lspconfig'}, -- Basic Neovim LSP configuration
-            {'hrsh7th/nvim-cmp'}, -- Autocompletion plugin
-            {'hrsh7th/cmp-nvim-lsp'}, -- LSP source for nvim-cmp
-            {'L3MON4D3/LuaSnip'}, -- Snippets plugin
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
+            { 'neovim/nvim-lspconfig' }, -- Basic Neovim LSP configuration
+            { 'hrsh7th/nvim-cmp' },      -- Autocompletion plugin
+            { 'hrsh7th/cmp-nvim-lsp' },  -- LSP source for nvim-cmp
+            { 'L3MON4D3/LuaSnip' },      -- Snippets plugin
         }
     }
 
@@ -63,7 +78,7 @@ return require('packer').startup(function(use)
 
     use {
         'linux-cultist/venv-selector.nvim',
-        required= { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+        required = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
     }
     use 'nvim-tree/nvim-web-devicons'
 
@@ -71,13 +86,13 @@ return require('packer').startup(function(use)
     use { "nvim-neotest/nvim-nio" }
 
     -- Debugger
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use 'theHamsta/nvim-dap-virtual-text'
     use 'Leoluz/nvim-dap-go'
     use { "folke/neodev.nvim", opts = {} }
     use {
         "mfussenegger/nvim-dap",
-        requires= {
+        requires = {
             { "rcarriga/nvim-dap-ui" },
             { "theHamsta/nvim-dap-virtual-text" },
             { "nvim-telescope/telescope-dap.nvim" },
@@ -85,7 +100,7 @@ return require('packer').startup(function(use)
             { "mfussenegger/nvim-dap-python" },
         },
     }
-    use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
+    use { "ellisonleao/glow.nvim", config = function() require("glow").setup() end }
 
     use {
         'numToStr/Comment.nvim',
@@ -94,12 +109,24 @@ return require('packer').startup(function(use)
         end
     }
 
-    use {'mfussenegger/nvim-dap-python'}
+    use { 'mfussenegger/nvim-dap-python' }
 
-    use {"folke/trouble.nvim"}
+    use { "folke/trouble.nvim" }
 
-    use {"lewis6991/gitsigns.nvim"}
+    use { "lewis6991/gitsigns.nvim" }
 
-    use {"isak102/telescope-git-file-history.nvim"}
+    use { "isak102/telescope-git-file-history.nvim" }
+
+    use { "folke/noice.nvim" }
+
+    use { "tpope/vim-surround" }
+
+    use { "lukas-reineke/indent-blankline.nvim", requires = {
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+
+    } }
 end)
-
