@@ -32,7 +32,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>") -- Map Ctrl-c to Escape in insert mode
 vim.keymap.set("n", "Q", "<nop>") -- No operation for Q
 
 -- Create a new tmux window with tmux-sessionizer
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")  -- Open tmux-sessionizer in a new tmux window
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>") -- Open tmux-sessionizer in a new tmux window
 
 -- LSP format command
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format) -- Format code with LSP

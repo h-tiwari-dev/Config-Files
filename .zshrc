@@ -63,6 +63,7 @@ alias vim="nvim"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PATH="/usr/local/anaconda3/bin:$PATH"
+export PATH="/Users/harshtiwari/.ebcli-virtual-env/executables:$PATH"
 
 export ENVIRONMENT="dev"
 export MYSQL_USERNAME="harshtiwari"

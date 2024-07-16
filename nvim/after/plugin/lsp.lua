@@ -12,7 +12,7 @@ require("neodev").setup({
 -- Function to execute a command and capture its output
 local function execute_command(command)
     local handle = io.popen(command)
-    if handle ~= nil then
+    if handle then
         local result = handle:read("*a")
         handle:close()
         return result and result:gsub("\n$", "") or nil
