@@ -129,4 +129,6 @@ return require('packer').startup(function(use)
         "rcarriga/nvim-notify",
 
     } }
+
+    use 'ThePrimeagen/vim-be-good'
 end)
